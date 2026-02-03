@@ -4,7 +4,8 @@ version: 0.0.1
 repository: https://github.com/your-username/flutter_dev_graph
 
 environment:
-  sdk: ^3.9.2
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 executables:
   fdg: fdg

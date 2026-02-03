@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:path/path.dart' as p;
 import 'package:flutter_dev_graph/src/file_scanner.dart';
+import 'package:flutter_dev_graph/src/import_parser.dart';
+import 'package:flutter_dev_graph/src/pubspec_reader.dart';
 
 void main(List<String> arguments) {
   // 경로 인자 처리
@@ -7,6 +10,15 @@ void main(List<String> arguments) {
 
   print('Scanning: $projectPath\n');
 
+  // 패키지 이름 읽기
+  final packageName = readPackageName(projectPath);
+  if (packageName == null) {
+    print('Error: pubspec.yaml not found or invalid.');
+    return;
+  }
+  print('Package: $packageName\n');
+
+  // 파일 스캔
   final scanner = FileScanner(projectPath: projectPath);
   final files = scanner.scan();
 
@@ -16,7 +28,28 @@ void main(List<String> arguments) {
   }
 
   print('Found ${files.length} dart files:\n');
+
+  // Import 파싱
+  final parser = ImportParser(
+    projectPath: projectPath,
+    packageName: packageName,
+  );
+  final importMap = parser.parseFiles(files);
+
+  // 결과 출력
   for (final file in files) {
-    print('  $file');
+    final relativePath = p.relative(file, from: projectPath);
+    final imports = importMap[file] ?? [];
+
+    print('$relativePath');
+    if (imports.isEmpty) {
+      print('  (no internal imports)');
+    } else {
+      for (final imp in imports) {
+        final relImp = p.relative(imp, from: projectPath);
+        print('  -> $relImp');
+      }
+    }
+    print('');
   }
 }
