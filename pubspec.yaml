@@ -1,14 +1,17 @@
 name: flutter_dev_graph
-description: A sample command-line application with basic argument parsing.
+description: A CLI tool to visualize Flutter/Dart project dependencies as a graph.
 version: 0.0.1
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/your-username/flutter_dev_graph
 
 environment:
   sdk: ^3.9.2
 
-# Add regular dependencies here.
+executables:
+  fdg: fdg
+
 dependencies:
   args: ^2.7.0
+  path: ^1.9.0
 
 dev_dependencies:
   lints: ^6.0.0
