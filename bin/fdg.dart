@@ -5,6 +5,7 @@ import 'package:flutter_dev_graph/src/import_parser.dart';
 import 'package:flutter_dev_graph/src/pubspec_reader.dart';
 import 'package:flutter_dev_graph/src/graph_builder.dart';
 import 'package:flutter_dev_graph/src/mermaid_generator.dart';
+import 'package:flutter_dev_graph/src/html_generator.dart';
 import 'package:flutter_dev_graph/src/config_reader.dart';
 
 void main(List<String> arguments) {
@@ -76,4 +77,10 @@ void main(List<String> arguments) {
   final mermaidPath = p.join(projectPath, 'graph.md');
   File(mermaidPath).writeAsStringSync(mermaidGenerator.generateMarkdown(graph));
   print('Output: $mermaidPath');
+
+  // HTML 출력
+  final htmlGenerator = HtmlGenerator(config: config);
+  final htmlPath = p.join(projectPath, 'graph.html');
+  File(htmlPath).writeAsStringSync(htmlGenerator.generate(graph, title: '$packageName - Dependency Graph'));
+  print('Output: $htmlPath');
 }

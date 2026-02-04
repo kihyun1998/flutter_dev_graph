@@ -79,13 +79,13 @@ Flutter/Dart 프로젝트 → 의존성 그래프 출력 (feature 기반 그룹�
 
 ---
 
-### v0.0.7 - HTML 출력
-- [ ] Mermaid.js CDN 임베드한 HTML 템플릿
-- [ ] Graph 데이터 삽입
-- [ ] `.html` 파일로 출력
-- [ ] 브라우저에서 바로 열어서 확인 가능
+### v0.0.7 - HTML 출력 ✅
+- [x] Mermaid.js CDN 임베드한 HTML 템플릿
+- [x] Graph 데이터 삽입
+- [x] `.html` 파일로 출력
+- [x] 브라우저에서 바로 열어서 확인 가능
 
-**확인**: 브라우저에서 그래프 보이는지
+**확인**: 브라우저에서 그래프 보이는지 ✅
 
 ---
 
@@ -143,6 +143,7 @@ lib/src/
   models.dart            # Node, Edge, Graph
   graph_builder.dart     # Graph 빌드
   mermaid_generator.dart # Mermaid 출력
+  html_generator.dart    # HTML 출력
   config_reader.dart     # fdg.yaml 파싱
 bin/
   fdg.dart               # CLI 진입점
