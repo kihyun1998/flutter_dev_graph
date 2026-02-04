@@ -7,8 +7,9 @@ class ProductService {
   Future<List<Product>> fetchProducts() async {
     final response = await _api.get('/products');
     return (response['items'] as List?)
-        ?.map((item) => Product.fromJson(item))
-        .toList() ?? [];
+            ?.map((item) => Product.fromJson(item))
+            .toList() ??
+        [];
   }
 
   Future<Product?> fetchProduct(String id) async {

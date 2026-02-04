@@ -2,11 +2,31 @@ import 'mermaid_generator.dart';
 import 'models.dart';
 import 'config_reader.dart';
 
+/// Generates a standalone HTML file with an interactive dependency graph.
+///
+/// The generated HTML uses Mermaid.js from CDN to render the graph,
+/// so it can be opened directly in a browser without any build step.
+///
+/// Example usage:
+/// ```dart
+/// final generator = HtmlGenerator(config: config);
+/// final html = generator.generate(graph, title: 'My Project');
+/// File('graph.html').writeAsStringSync(html);
+/// ```
 class HtmlGenerator {
+  /// Optional configuration for grouping nodes.
   final FdgConfig? config;
 
+  /// Creates a new [HtmlGenerator] instance.
   HtmlGenerator({this.config});
 
+  /// Generates a complete HTML document with the dependency graph.
+  ///
+  /// [graph] is the dependency graph to render.
+  /// [title] is the page title (defaults to 'Dependency Graph').
+  ///
+  /// Returns a complete HTML document string that can be saved to a file
+  /// and opened in any modern web browser.
   String generate(Graph graph, {String title = 'Dependency Graph'}) {
     final mermaidGenerator = MermaidGenerator(config: config);
     final mermaidCode = mermaidGenerator.generate(graph);

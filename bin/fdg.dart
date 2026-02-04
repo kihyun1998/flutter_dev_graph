@@ -1,13 +1,14 @@
 import 'dart:io';
+
 import 'package:args/args.dart';
-import 'package:path/path.dart' as p;
-import 'package:flutter_dev_graph/src/file_scanner.dart';
-import 'package:flutter_dev_graph/src/import_parser.dart';
-import 'package:flutter_dev_graph/src/pubspec_reader.dart';
-import 'package:flutter_dev_graph/src/graph_builder.dart';
-import 'package:flutter_dev_graph/src/mermaid_generator.dart';
-import 'package:flutter_dev_graph/src/html_generator.dart';
 import 'package:flutter_dev_graph/src/config_reader.dart';
+import 'package:flutter_dev_graph/src/file_scanner.dart';
+import 'package:flutter_dev_graph/src/graph_builder.dart';
+import 'package:flutter_dev_graph/src/html_generator.dart';
+import 'package:flutter_dev_graph/src/import_parser.dart';
+import 'package:flutter_dev_graph/src/mermaid_generator.dart';
+import 'package:flutter_dev_graph/src/pubspec_reader.dart';
+import 'package:path/path.dart' as p;
 
 void main(List<String> arguments) {
   final parser = ArgParser()
@@ -57,7 +58,8 @@ void main(List<String> arguments) {
   }
 
   // 프로젝트 경로 (나머지 인자에서 첫 번째)
-  final projectPath = args.rest.isNotEmpty ? args.rest[0] : Directory.current.path;
+  final projectPath =
+      args.rest.isNotEmpty ? args.rest[0] : Directory.current.path;
   final format = args['format'] as String;
   final outputBase = args['output'] as String;
   final excludePatterns = args['exclude'] as List<String>;
@@ -81,7 +83,8 @@ void main(List<String> arguments) {
   // 파일 스캔 (추가 exclude 패턴 적용)
   final defaultExclude = ['.g.dart', '.freezed.dart'];
   final allExclude = [...defaultExclude, ...excludePatterns];
-  final scanner = FileScanner(projectPath: projectPath, excludePatterns: allExclude);
+  final scanner =
+      FileScanner(projectPath: projectPath, excludePatterns: allExclude);
   final files = scanner.scan();
 
   if (files.isEmpty) {
@@ -106,7 +109,7 @@ void main(List<String> arguments) {
       final relativePath = p.relative(file, from: projectPath);
       final imports = importMap[file] ?? [];
 
-      print('$relativePath');
+      print(relativePath);
       if (imports.isEmpty) {
         print('  (no internal imports)');
       } else {
@@ -128,7 +131,8 @@ void main(List<String> arguments) {
   // 설정 파일 읽기
   final config = readConfig(projectPath) ?? FdgConfig.defaultConfig();
   if (verbose) {
-    print('Config: fdg.yaml ${File(p.join(projectPath, 'fdg.yaml')).existsSync() ? 'found' : 'not found (using defaults)'}');
+    print(
+        'Config: fdg.yaml ${File(p.join(projectPath, 'fdg.yaml')).existsSync() ? 'found' : 'not found (using defaults)'}');
   }
 
   // 출력
@@ -144,14 +148,16 @@ void main(List<String> arguments) {
   if (format == 'mermaid' || format == 'all') {
     final mermaidGenerator = MermaidGenerator(config: config);
     final mermaidPath = p.join(outputDir, '$outputName.md');
-    File(mermaidPath).writeAsStringSync(mermaidGenerator.generateMarkdown(graph));
+    File(mermaidPath)
+        .writeAsStringSync(mermaidGenerator.generateMarkdown(graph));
     print('Output: $mermaidPath');
   }
 
   if (format == 'html' || format == 'all') {
     final htmlGenerator = HtmlGenerator(config: config);
     final htmlPath = p.join(outputDir, '$outputName.html');
-    File(htmlPath).writeAsStringSync(htmlGenerator.generate(graph, title: '$packageName - Dependency Graph'));
+    File(htmlPath).writeAsStringSync(htmlGenerator.generate(graph,
+        title: '$packageName - Dependency Graph'));
     print('Output: $htmlPath');
   }
 }

@@ -8,7 +8,10 @@ class ApiClient {
     return {};
   }
 
-  Future<Map<String, dynamic>> post(String path, Map<String, dynamic> body) async {
+  Future<Map<String, dynamic>> post(
+    String path,
+    Map<String, dynamic> body,
+  ) async {
     // HTTP POST
     return {};
   }

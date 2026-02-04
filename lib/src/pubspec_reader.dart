@@ -1,7 +1,20 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
-/// pubspec.yaml에서 패키지 이름 읽기
+/// Reads the package name from a project's pubspec.yaml file.
+///
+/// [projectPath] is the root directory of the Flutter/Dart project.
+///
+/// Returns the package name if found, or `null` if the pubspec.yaml
+/// doesn't exist or is invalid.
+///
+/// Example usage:
+/// ```dart
+/// final name = readPackageName('/path/to/project');
+/// if (name != null) {
+///   print('Package: $name');
+/// }
+/// ```
 String? readPackageName(String projectPath) {
   final pubspecPath = p.join(projectPath, 'pubspec.yaml');
   final file = File(pubspecPath);
@@ -12,7 +25,7 @@ String? readPackageName(String projectPath) {
 
   final content = file.readAsStringSync();
 
-  // name: package_name 형태 추출
+  // Extract "name: package_name" from pubspec.yaml
   final nameRegex = RegExp(r'^name:\s*(\S+)', multiLine: true);
   final match = nameRegex.firstMatch(content);
 
