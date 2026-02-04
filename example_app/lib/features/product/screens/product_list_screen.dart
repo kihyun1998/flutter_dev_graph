@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
 import '../services/product_service.dart';
-import '../utils/helpers.dart';
-import '../widgets/loading_indicator.dart';
+import '../models/product.dart';
+import '../widgets/product_card.dart';
+import '../../../shared/widgets/loading_indicator.dart';
 import 'product_detail_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -24,11 +24,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   void _loadProducts() async {
-    final products = await _productService.getProducts();
-    setState(() {
-      _products = products;
-      _loading = false;
-    });
+    _products = await _productService.fetchProducts();
+    setState(() => _loading = false);
   }
 
   @override
@@ -39,17 +36,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(title: const Text('Products')),
       body: ListView.builder(
         itemCount: _products.length,
-        itemBuilder: (context, index) {
-          final product = _products[index];
-          return ListTile(
-            title: Text(product.name),
-            subtitle: Text(Helpers.formatPrice(product.price)),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => ProductDetailScreen(productId: product.id)),
+        itemBuilder: (ctx, i) => ProductCard(
+          product: _products[i],
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ProductDetailScreen(productId: _products[i].id),
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

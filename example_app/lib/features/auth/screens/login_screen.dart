@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
+import '../widgets/login_form.dart';
+import '../../../shared/widgets/loading_indicator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,22 +14,25 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _authService = AuthService();
+  bool _loading = false;
 
   @override
   Widget build(BuildContext context) {
+    if (_loading) return const LoadingIndicator();
+
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
-      body: Column(
-        children: [
-          CustomTextField(hint: 'Email', controller: _emailController),
-          CustomTextField(hint: 'Password', controller: _passwordController, obscureText: true),
-          CustomButton(text: 'Login', onPressed: _login),
-        ],
+      body: LoginForm(
+        emailController: _emailController,
+        passwordController: _passwordController,
+        onSubmit: _login,
       ),
     );
   }
 
   void _login() async {
+    setState(() => _loading = true);
     await _authService.login(_emailController.text, _passwordController.text);
+    setState(() => _loading = false);
   }
 }

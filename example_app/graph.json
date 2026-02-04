@@ -1,0 +1,203 @@
+{
+  "nodes": [
+    {
+      "id": "n0",
+      "path": "lib\\core\\network\\api_client.dart",
+      "name": "api_client"
+    },
+    {
+      "id": "n1",
+      "path": "lib\\core\\utils\\constants.dart",
+      "name": "constants"
+    },
+    {
+      "id": "n2",
+      "path": "lib\\core\\utils\\validators.dart",
+      "name": "validators"
+    },
+    {
+      "id": "n3",
+      "path": "lib\\features\\auth\\screens\\login_screen.dart",
+      "name": "login_screen"
+    },
+    {
+      "id": "n4",
+      "path": "lib\\features\\auth\\services\\auth_service.dart",
+      "name": "auth_service"
+    },
+    {
+      "id": "n5",
+      "path": "lib\\features\\auth\\widgets\\login_form.dart",
+      "name": "login_form"
+    },
+    {
+      "id": "n6",
+      "path": "lib\\features\\home\\screens\\home_screen.dart",
+      "name": "home_screen"
+    },
+    {
+      "id": "n7",
+      "path": "lib\\features\\home\\services\\home_service.dart",
+      "name": "home_service"
+    },
+    {
+      "id": "n8",
+      "path": "lib\\features\\home\\widgets\\home_header.dart",
+      "name": "home_header"
+    },
+    {
+      "id": "n9",
+      "path": "lib\\features\\product\\models\\product.dart",
+      "name": "product"
+    },
+    {
+      "id": "n10",
+      "path": "lib\\features\\product\\screens\\product_detail_screen.dart",
+      "name": "product_detail_screen"
+    },
+    {
+      "id": "n11",
+      "path": "lib\\features\\product\\screens\\product_list_screen.dart",
+      "name": "product_list_screen"
+    },
+    {
+      "id": "n12",
+      "path": "lib\\features\\product\\services\\product_service.dart",
+      "name": "product_service"
+    },
+    {
+      "id": "n13",
+      "path": "lib\\features\\product\\widgets\\product_card.dart",
+      "name": "product_card"
+    },
+    {
+      "id": "n14",
+      "path": "lib\\main.dart",
+      "name": "main"
+    },
+    {
+      "id": "n15",
+      "path": "lib\\shared\\widgets\\custom_button.dart",
+      "name": "custom_button"
+    },
+    {
+      "id": "n16",
+      "path": "lib\\shared\\widgets\\loading_indicator.dart",
+      "name": "loading_indicator"
+    }
+  ],
+  "edges": [
+    {
+      "source": "n0",
+      "target": "n1"
+    },
+    {
+      "source": "n3",
+      "target": "n4"
+    },
+    {
+      "source": "n3",
+      "target": "n5"
+    },
+    {
+      "source": "n3",
+      "target": "n16"
+    },
+    {
+      "source": "n4",
+      "target": "n0"
+    },
+    {
+      "source": "n4",
+      "target": "n2"
+    },
+    {
+      "source": "n5",
+      "target": "n15"
+    },
+    {
+      "source": "n6",
+      "target": "n7"
+    },
+    {
+      "source": "n6",
+      "target": "n8"
+    },
+    {
+      "source": "n6",
+      "target": "n16"
+    },
+    {
+      "source": "n6",
+      "target": "n11"
+    },
+    {
+      "source": "n7",
+      "target": "n0"
+    },
+    {
+      "source": "n8",
+      "target": "n1"
+    },
+    {
+      "source": "n10",
+      "target": "n12"
+    },
+    {
+      "source": "n10",
+      "target": "n9"
+    },
+    {
+      "source": "n10",
+      "target": "n16"
+    },
+    {
+      "source": "n10",
+      "target": "n15"
+    },
+    {
+      "source": "n11",
+      "target": "n12"
+    },
+    {
+      "source": "n11",
+      "target": "n9"
+    },
+    {
+      "source": "n11",
+      "target": "n13"
+    },
+    {
+      "source": "n11",
+      "target": "n16"
+    },
+    {
+      "source": "n11",
+      "target": "n10"
+    },
+    {
+      "source": "n12",
+      "target": "n0"
+    },
+    {
+      "source": "n12",
+      "target": "n9"
+    },
+    {
+      "source": "n13",
+      "target": "n9"
+    },
+    {
+      "source": "n13",
+      "target": "n15"
+    },
+    {
+      "source": "n14",
+      "target": "n3"
+    },
+    {
+      "source": "n14",
+      "target": "n1"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# fdg 설정 파일
+# 그룹핑 규칙 정의
+
+groups:
+  # 패턴: lib/features/{feature}/** -> feature별 그룹
+  - pattern: "lib/features/([^/]+)/.*"
+    name: "feature:$1"
+
+  # 패턴: lib/core/** -> core 그룹
+  - pattern: "lib/core/.*"
+    name: "core"
+
+  # 패턴: lib/shared/** -> shared 그룹
+  - pattern: "lib/shared/.*"
+    name: "shared"
+
+# 제외 패턴
+exclude:
+  - "*.g.dart"
+  - "*.freezed.dart"

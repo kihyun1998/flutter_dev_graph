@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
 import '../services/product_service.dart';
-import '../utils/helpers.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/loading_indicator.dart';
+import '../models/product.dart';
+import '../../../shared/widgets/loading_indicator.dart';
+import '../../../shared/widgets/custom_button.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String productId;
@@ -26,11 +25,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   void _loadProduct() async {
-    final product = await _productService.getProductById(widget.productId);
-    setState(() {
-      _product = product;
-      _loading = false;
-    });
+    _product = await _productService.fetchProduct(widget.productId);
+    setState(() => _loading = false);
   }
 
   @override
@@ -42,7 +38,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       body: Column(
         children: [
           Text(_product?.name ?? ''),
-          Text(Helpers.formatPrice(_product?.price ?? 0)),
+          Text('\$${_product?.price ?? 0}'),
           CustomButton(text: 'Add to Cart', onPressed: () {}),
         ],
       ),
