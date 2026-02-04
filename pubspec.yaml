@@ -1,8 +1,8 @@
 name: flutter_dev_graph
 description: A CLI tool to visualize Flutter/Dart project dependencies as a graph with feature-based grouping support.
 version: 0.1.0
-repository: https://github.com/mj-studio-library/flutter_dev_graph
-homepage: https://github.com/mj-studio-library/flutter_dev_graph
+repository: https://github.com/kihyun1998/flutter_dev_graph
+homepage: https://github.com/kihyun1998/flutter_dev_graph
 topics:
   - dependency
   - graph
