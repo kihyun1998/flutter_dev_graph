@@ -3,6 +3,9 @@ import 'package:path/path.dart' as p;
 import 'package:flutter_dev_graph/src/file_scanner.dart';
 import 'package:flutter_dev_graph/src/import_parser.dart';
 import 'package:flutter_dev_graph/src/pubspec_reader.dart';
+import 'package:flutter_dev_graph/src/graph_builder.dart';
+import 'package:flutter_dev_graph/src/mermaid_generator.dart';
+import 'package:flutter_dev_graph/src/config_reader.dart';
 
 void main(List<String> arguments) {
   // 경로 인자 처리
@@ -52,4 +55,25 @@ void main(List<String> arguments) {
     }
     print('');
   }
+
+  // 그래프 빌드
+  final builder = GraphBuilder(projectPath: projectPath);
+  final graph = builder.build(importMap);
+
+  print('Graph: ${graph.nodes.length} nodes, ${graph.edges.length} edges\n');
+
+  // JSON 출력
+  final jsonPath = p.join(projectPath, 'graph.json');
+  File(jsonPath).writeAsStringSync(graph.toJsonString(pretty: true));
+  print('Output: $jsonPath');
+
+  // 설정 파일 읽기
+  final config = readConfig(projectPath) ?? FdgConfig.defaultConfig();
+  print('Config: fdg.yaml ${File(p.join(projectPath, 'fdg.yaml')).existsSync() ? 'found' : 'not found (using defaults)'}');
+
+  // Mermaid 출력
+  final mermaidGenerator = MermaidGenerator(config: config);
+  final mermaidPath = p.join(projectPath, 'graph.md');
+  File(mermaidPath).writeAsStringSync(mermaidGenerator.generateMarkdown(graph));
+  print('Output: $mermaidPath');
 }
